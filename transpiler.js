@@ -225,6 +225,8 @@ function transpiler(opts) {
                     transform(path, outputDir + '/' + file, opts);
                 } else if (fs.statSync(path).isDirectory()) {
                     traverse(inputRoot, path);
+                } else { //just copy the file over to the directory
+                    sh.cp('', path, outputDir + '/' + file);
                 }
             });
         }(opts.input, opts.input));
