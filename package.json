@@ -1,0 +1,25 @@
+{
+  "name": "es6-module-clean-transpilation",
+  "version": "0.2.0",
+  "description": "es6-module-clean-transpilation is an experimental compiler that allows you to write your JavaScript using a subset of the current ES6 module syntax, and compile it into clean AMD, CommonJS, UMD and globals styles.",
+  "main": "./transpiler",
+  "homepage": "https://github.com/Munawwar/es6-module-to-es5",
+  "dependencies": {
+    "nomnom": "1.8.1",
+    "shelljs": "0.5.1"
+  },
+  "devDependencies": {
+  },
+  "bugs": "https://github.com/Munawwar/es6-module-clean-transpilation/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Munawwar/es6-module-clean-transpilation.git"
+  },
+  "keywords": [
+    "es6",
+    "module",
+    "transpile",
+    "amd",
+    "commonjs"
+  ]
+}
