@@ -20,9 +20,8 @@ var importRegEx = /^[ ]*import[ ]*([^ ]+)[ ]*from[ ]*(.+?)[;]*$/,
     exportRegEx = /^([ ]*export[ ]*default[ ]*)(.+?)[;]*$/;
 
 
-function transform(input, output, opts) {
-    var source = fs.readFileSync(input).toString(),
-        result = source;
+function transform(source, output, opts) {
+    var result = source;
 
     var lf = (/\r\n/).test(source) ? '\r\n' : '\n',
         newlineLength = (/\r\n/).test(source) ? 2 : 1; //assume consistent newline characters.
@@ -212,7 +211,7 @@ function transform(input, output, opts) {
 }
 
 function transpiler(opts) {
-    if (fs.statSync(opts.input).isDirectory()) {
+    if (opts.input && fs.statSync(opts.input).isDirectory()) {
         (function traverse (inputRoot, dir) {
             //make output directory
             var outputDir = opts.output + '/' + dir.substr(inputRoot.length);
@@ -222,7 +221,7 @@ function transpiler(opts) {
             files.forEach(function (file) {
                 var path = dir + '/' + file;
                 if (file.slice(-3).toLowerCase() === '.js') {
-                    transform(path, outputDir + '/' + file, opts);
+                    transform(fs.readFileSync(path).toString(), outputDir + '/' + file, opts);
                 } else if (fs.statSync(path).isDirectory()) {
                     traverse(inputRoot, path);
                 } else { //just copy the file over to the directory
@@ -236,7 +235,7 @@ function transpiler(opts) {
             var pos = opts.input.lastIndexOf('/');
             opts.output += '/' + opts.input.substr(pos < 0 ? 0 : pos);
         }
-        transform(opts.input, opts.output, opts);
+        transform(opts.src || fs.readFileSync(opts.input).toString(), opts.output, opts);
     }
 }
 
