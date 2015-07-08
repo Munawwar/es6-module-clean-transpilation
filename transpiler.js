@@ -231,33 +231,35 @@ function transpiler(opts) {
             });
         }(opts.input, opts.input));
     } else {
-        if (opts.output !== 'stdout' && opts.output.slice(-3).toLowerCase() !== '.js') {
+        if (opts.output && opts.output !== 'stdout' && opts.output.slice(-3).toLowerCase() !== '.js') {
             sh.mkdir('-p', opts.output);
             var pos = opts.input.lastIndexOf('/');
             opts.output += '/' + opts.input.substr(pos < 0 ? 0 : pos);
         }
-        transform(opts.src || fs.readFileSync(opts.input).toString(), opts.output, opts);
+        return transform(opts.src || fs.readFileSync(opts.input).toString(), opts.output, opts);
     }
 }
 
-var opts = nomnom
-    .option('input', {
-        abbr: 'i',
-        help: 'path to file'
-    })
-    .option('output', {
-        abbr: 'o',
-        default: 'stdout',
-        help: 'path to output file or directory or stdout'
-    })
-    .option('type', {
-        abbr: 't',
-        default: 'amd',
-        help: 'Type of output required - amd, cjs, umd or globals'
-    })
-    .parse();
 
-if (opts.input) {
+if (require.main === module) {
+    var opts = nomnom
+        .option('input', {
+            abbr: 'i',
+            help: 'path to file'
+        })
+        .option('output', {
+            abbr: 'o',
+            default: 'stdout',
+            help: 'path to output file or directory or stdout'
+        })
+        .option('type', {
+            abbr: 't',
+            default: 'amd',
+            help: 'Type of output required - amd, cjs, umd or globals'
+        })
+        .parse();
+
+    //Called directly from command-line
     transpiler(opts);
 }
 
