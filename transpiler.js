@@ -36,8 +36,9 @@ function transform(source, output, opts) {
         match;
 
     //Find the first sequence of ES6 imports.
+    var line;
     for (var i = 0; i < lines.length; i += 1) {
-        var line = lines[i];
+        line = lines[i];
         if ((match = line.match(importRegEx))) {
             imports.push(match.slice(1));
             if (first.line < 0) {
@@ -212,7 +213,7 @@ function transform(source, output, opts) {
 
 function transpiler(opts) {
     if (opts.input && fs.statSync(opts.input).isDirectory()) {
-        (function traverse (inputRoot, dir) {
+        (function traverse(inputRoot, dir) {
             //make output directory
             var outputDir = opts.output + '/' + dir.substr(inputRoot.length);
             sh.mkdir('-p', outputDir);
