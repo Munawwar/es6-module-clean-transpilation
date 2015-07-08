@@ -220,7 +220,7 @@ function transpiler(opts) {
 
             var files = fs.readdirSync(dir);
             files.forEach(function (file) {
-                var path = inputRoot + '/' + file;
+                var path = dir + '/' + file;
                 if (file.slice(-3).toLowerCase() === '.js') {
                     transform(path, outputDir + '/' + file, opts);
                 } else if (fs.statSync(path).isDirectory()) {
