@@ -136,7 +136,7 @@ function transform(source, output, opts) {
 
         //convert the only export statement
         if (source.slice(-newlineLength) === lf) {
-            replace(source.length - 2, source.length, '');
+            replace(source.length - newlineLength, source.length, '');
         }
         insert(result.length, lf + '});' + lf);
         replace(exports.s, exports.varPos, 'return ');
@@ -165,7 +165,7 @@ function transform(source, output, opts) {
 
         //convert the only export statement
         if (source.slice(-newlineLength) === lf) {
-            replace(source.length - 2, source.length, '');
+            replace(source.length - newlineLength, source.length, '');
         }
         replace(exports.s, exports.varPos, 'global.' + exports.variableName + ' = ');
 
@@ -183,7 +183,7 @@ function transform(source, output, opts) {
 
         //convert the only export statement
         if (source.slice(-newlineLength) === lf) {
-            replace(source.length - 2, source.length, '');
+            replace(source.length - newlineLength, source.length, '');
         }
         replace(exports.s, exports.varPos, 'module.exports = ');
 
