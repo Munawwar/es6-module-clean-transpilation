@@ -81,10 +81,11 @@ function transform(source, output, opts) {
     }
 
     //helper functions
-    function getVars(arr) {
+    function getVars(arr, prefix) {
         var code = '';
+        prefix  = prefix || '';
         arr.forEach(function (im) {
-            code += im[0] + ', ';
+            code += prefix + im[0] + ', ';
         });
         if (arr.length) {
             code = code.slice(0, -2);
@@ -154,7 +155,7 @@ function transform(source, output, opts) {
     } else if (opts.type === 'globals') {
         //Change things from bottom to up so that inserts/replace doesn't affect subsequent indexes.
 
-        var vars = getVars(imports);
+        var vars = getVars(imports, 'this.');
         if (vars) {
             vars = ', ' + vars;
         }
@@ -170,6 +171,10 @@ function transform(source, output, opts) {
         replace(exports.s, exports.varPos, 'global.' + exports.variableName + ' = ');
 
         //Convert imports
+        vars = getVars(imports);
+        if (vars) {
+            vars = ', ' + vars;
+        }
         code = '(function (global' + vars + ') {' + lf;
 
         if (last.char > 0) {
