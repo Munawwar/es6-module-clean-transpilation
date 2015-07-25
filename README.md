@@ -99,7 +99,7 @@ define(["jquery"],
     ...
   });
 ```
-And *that* isn't convenient for users of your code (especially when trying to use a compiled reusable library in an non-compiled app).
+And *that* isn't convenient for users of your code (especially if you using a library at many places in existing code bases, it is difficult to refactor all that code to make this change).
 
 #### `module`
 
