@@ -10,7 +10,7 @@ if you don't intend to publish your library/code with support for all of them.
 Secondly the generated code should be usable by existing AMD and globals using code bases.
 
 And hence this comes with some trade-offs and code conventions. Only a subset of the current ES6 module syntax can be supported.
-Specifically only default imports and default exports can be supported. Named imports, named imports and bare imports are excluded (more info on that later in this page).
+Specifically only default imports and default exports can be supported. Named imports, named exports and bare imports are excluded (more info on that later in this page).
 
 **Hence it is mandatory to follow the convention: All JS files should export a default object and when importing, only use default imports**.
 
