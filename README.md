@@ -75,9 +75,6 @@ import $ from "jquery";
 
 The default export of the "jquery" module is now aliased to `$`.
 
-A default export makes the most sense as a module's "main" export, like the
-`jQuery` object in jQuery. You can use default and named exports in parallel.
-
 ### Unsupported Syntax
 
 ### Bare imports
